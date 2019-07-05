@@ -1,17 +1,27 @@
 class Gato {
-  constructor(x, y, width, height, color) {
+  constructor(x, y, width, height, color, gravity) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.color = color;
-    this.jump = true;
-    this.vx = 0;
-    this.vy = 0;
+    this.gravity = gravity;
+    this.jump = 25;
   }
 
   draw() {
     game.ctx.fillStyle = this.color;
     game.ctx.fillRect(this.x, this.y, this.width, this.height);
+  }
+  update(maxY, maxX, minY, minX) {
+    this.y += this.gravity;
+    if ((this.x + this.width) >= maxX || (this.y+this.height) >= maxY || this.x <= minX || this.y <= minY ) {
+      return -1;
+    } //JUMP
+    return 0;
+  }
+
+  jumpp(){
+    this.y = this.y - this.jump
   }
 }
