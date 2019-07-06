@@ -6,7 +6,7 @@ class Gato {
     this.height = height;
     this.color = color;
     this.gravity = gravity;
-    this.jump = 25;
+    this.jump = 20;
   }
 
   draw() {
@@ -15,13 +15,18 @@ class Gato {
   }
   update(maxY, maxX, minY, minX) {
     this.y += this.gravity;
-    if ((this.x + this.width) >= maxX || (this.y+this.height) >= maxY || this.x <= minX || this.y <= minY ) {
+    if (
+      this.x + this.width >= maxX ||
+      this.y + this.height >= maxY ||
+      this.x <= minX ||
+      this.y <= minY
+    ) {
       return -1;
     } //JUMP
     return 0;
   }
 
-  jumpp(){
-    this.y = this.y - this.jump
+  jumpp() {
+    this.y = this.y - this.jump;
   }
 }

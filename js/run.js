@@ -6,6 +6,6 @@ window.addEventListener("keyup", function(e) {
   if (e.keyCode == 32) {
     console.log("espacio");
     game.player.jumpp();
-    this.console.log(game.player.y);
+    console.log(game.player.y);
   }
 });

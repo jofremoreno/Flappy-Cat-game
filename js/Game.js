@@ -19,7 +19,7 @@ class Game {
     canvas.height = "300";
     this.ctx = canvas.getContext("2d");
     this.ctx.fillStyle = "rgba(0,0,0,1)";
-    this.ctx.fillRect(0, 0, 500, 300);
+    this.ctx.fillRect(0, 0, 300, 300);
   }
   start() {
     this.loopGame = window.requestAnimationFrame(this._update.bind(this));
