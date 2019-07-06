@@ -2,9 +2,9 @@ class Game {
   constructor() {
     this.ctx = undefined;
     this.player = new Gato(20, 100, 30, 30, "rgba(255,0,0,1)", 1);
-    this.obstacle = new Obstaculos(200, 0, 40, 150, "rgba(150,150,0,1)");
+    this.obstacle = new Obstaculos(500, 0, 40, 150, "rgba(150,150,0,1)");
     this.obstacle2 = new Obstaculos(
-      200,
+      500,
       300 - 100,
       40,
       100,
@@ -29,6 +29,8 @@ class Game {
     this.ctx.fillStyle = "rgba(0,0,0,1)";
     this.ctx.fillRect(0, 0, 500, 300); //borrado
     this.player.draw();
+    this.obstacle.x--;
+    this.obstacle2.x--;
     var resultado = this.player.update(300, 500, 0, 0);
 
     this.obstacle.draw();
