@@ -6,7 +6,7 @@ class Gato {
     this.height = height;
     this.color = color;
     this.gravity = gravity;
-    this.jump = 20;
+    this.jump = 30;
   }
 
   draw() {
@@ -22,7 +22,7 @@ class Gato {
       this.y <= minY
     ) {
       return -1;
-    } //JUMP
+    }
     return 0;
   }
 
