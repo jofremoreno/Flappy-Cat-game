@@ -44,7 +44,10 @@ class Game {
     arrayObstacle.forEach(obstacle => {
       obstacle.update();
       obstacle.draw();
-      if (this.checkCollisionUp(obstacle) === true) {
+      if (
+        this.checkCollisionUp(obstacle) ||
+        this.checkCollisionDown(obstacle) === true
+      ) {
         console.log("he colisionado");
         resultado = -1;
       }
@@ -56,7 +59,6 @@ class Game {
     }
     console.log("array");
     var resultado = this.player.update(300, 500, 0, 0);
-
   }
   //COLISION SUPERIOR
   checkCollisionUp(obstacle) {
@@ -73,10 +75,40 @@ class Game {
 
     var crash = true;
 
-    if ( myBottom < obsTop || myTop > obsBottom || myRight < obsLeft || myLeft > obsRight ) {
-    crash = false;
+    if (
+      myBottom < obsTop ||
+      myTop > obsBottom ||
+      myRight < obsLeft ||
+      myLeft > obsRight
+    ) {
+      crash = false;
+    }
+    return crash;
   }
-  return crash;
-};
 
+  //COLISION INFERIOR
+  checkCollisionDown(obstacle) {
+    console.log("dentro CheckCollision");
+    var myLeft = this.player.x;
+    var myRight = this.player.x + this.player.width;
+    var myTop = this.player.y;
+    var myBottom = this.player.y + this.player.height;
+
+    var obsLeft = obstacle.x;
+    var obsRight = obstacle.x + obstacle.width;
+    var obsTop = obstacle.y;
+    var obsBottom = obstacle.y + obstacle.height;
+
+    var crash = true;
+
+    if (
+      myBottom < obsTop ||
+      myTop > obsBottom ||
+      myRight < obsLeft ||
+      myLeft > obsRight
+    ) {
+      crash = false;
+    }
+    return crash;
   }
+}
