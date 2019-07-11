@@ -46,9 +46,9 @@ class Game {
     console.log("dentro CheckCollision");
 
     if (
-      (this.player.x + this.player.width > obstacle.x &&
+      (this.player.x + this.player.width > obstacle.x && this.player.x + this.player.width < obstacle.x &&
         this.player.y < obstacle.y + obstacle.height) ||
-      (this.player.x + this.player.width > this.obstacle2.x &&
+      (this.player.x + this.player.width > this.obstacle2.x && this.player.x + this.player.width < this.obstacle2.x &&
         this.player.y + this.player.height > this.obstacle2.y)
     ) {
       return true;
