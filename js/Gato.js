@@ -6,7 +6,7 @@ class Gato {
     this.height = height;
     this.color = color;
     this.gravity = gravity;
-    this.jump = 30;
+    this.jump = 22;
   }
 
   draw() {

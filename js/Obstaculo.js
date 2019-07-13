@@ -5,7 +5,6 @@ class Obstaculos {
     this.width = width;
     this.height = height;
     this.color = color;
-    this.spaceBetween = this.obstaculo - this.obstaculo2;
     //intentando mantener espaciado entre obstaculos siempre iguales
   }
   draw() {

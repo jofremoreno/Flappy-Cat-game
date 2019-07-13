@@ -19,7 +19,7 @@ class Game {
       let x = 500;
       let y = 0;
       let widthObstacle = 40; 
-      let spaceBetween = 80;
+      let spaceBetween = 90;
       let obstacleHeight = Math.floor(Math.random() * 150) + 40; 
   
 
@@ -33,7 +33,7 @@ class Game {
         arrayObstacle.shift();
         arrayObstacle.shift();
       }
-    }, 2500);
+    }, 2550);
     this.loopGame = window.requestAnimationFrame(this._update.bind(this));
   }
   _update() {
