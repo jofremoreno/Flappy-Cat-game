@@ -5,7 +5,6 @@ class Obstaculos {
     this.width = width;
     this.height = height;
     this.color = color;
-    //intentando mantener espaciado entre obstaculos siempre iguales
   }
   draw() {
     game.ctx.fillStyle = this.color;
