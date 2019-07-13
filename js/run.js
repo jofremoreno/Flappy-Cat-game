@@ -11,7 +11,7 @@ document.onload = (function() {
       if (e.keyCode == 32) {
         console.log("espacio");
         game.player.jumpp();
-        console.log(game.player.y);
+        //console.log(game.player.y);
       }
     });
   });

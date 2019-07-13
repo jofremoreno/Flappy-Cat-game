@@ -1,9 +1,9 @@
 class Game {
   constructor() {
     this.ctx = undefined;
-    this.player = new Gato(20, 100, 80, 38, "rgba(255,0,0,1)", 1);
-    this.obstacle = new Obstaculos("rgba(150,150,0,1)");
-    this.obstacle2 = new Obstaculos("rgba(150,150,0,1)");
+    this.player = new Gato(20, 100, 60, 60, "rgba(255,0,0,1)", 1);
+    this.obstacle = new Obstaculos//("rgba(150,150,0,1)");
+    this.obstacle2 = new Obstaculos//("rgba(150,150,0,1)");
     this.loopGame = undefined;
     this.background = new Image();
     this.background.src = "images/background.png";

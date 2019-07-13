@@ -8,7 +8,7 @@ class Gato {
     this.gravity = gravity;
     this.jump = 22;
     this.gatoImage = new Image();
-    this.gatoImage.src = "images/gato3.png";
+    this.gatoImage.src = "images/dakota1.png";
   }
 
   draw() {
