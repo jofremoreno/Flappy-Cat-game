@@ -2,14 +2,8 @@ class Game {
   constructor() {
     this.ctx = undefined;
     this.player = new Gato(20, 100, 40, 40, "rgba(255,0,0,1)", 1);
-    this.obstacle = new Obstaculos(500, 0, 40, 130, "rgba(150,150,0,1)");
-    this.obstacle2 = new Obstaculos(
-      500,
-      300 - 40,
-      40,
-      100,
-      "rgba(150,150,0,1)"
-    );
+    this.obstacle = new Obstaculos( "rgba(150,150,0,1)");
+    this.obstacle2 = new Obstaculos("rgba(150,150,0,1)");
     this.loopGame = undefined;
   }
   initCanvas() {
@@ -22,12 +16,18 @@ class Game {
   }
   start() {
     setInterval(() => {
-      let height = 0; //para el mathrandom
+      let x = 500;
+      let y = 0;
+      let widthObstacle = 40; 
+      let spaceBetween = 80;
+      let obstacleHeight = Math.floor(Math.random() * 150) + 40; 
+  
+
+      arrayObstacle.push(new Obstaculos(x, y, widthObstacle, obstacleHeight, "rgba(150,150,0,1)"));
       arrayObstacle.push(
-        new Obstaculos(500, 0, 40, 130, "rgba(150,150,0,1)", 1)
-      );
-      arrayObstacle.push(
-        new Obstaculos(500, 300 - 40, 40, 100, "rgba(150,150,0,1)", 1)
+        new Obstaculos(x, y + obstacleHeight + spaceBetween, widthObstacle, 300,
+          "rgba(150,150,0,1)"
+        )
       );
       if (arrayObstacle.length > 8) {
         arrayObstacle.shift();
