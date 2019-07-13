@@ -13,17 +13,10 @@ class Gato {
     game.ctx.fillStyle = this.color;
     game.ctx.fillRect(this.x, this.y, this.width, this.height);
   }
-  update(maxY, maxX, minY, minX) {
+  update() {
     this.y += this.gravity;
-    if (
-      this.x + this.width >= maxX ||
-      this.y + this.height >= maxY ||
-      this.x <= minX ||
-      this.y <= minY
-    ) {
-      return -1;
-    }
-    return 0;
+    if (this.y>0 && this.y<260) return 0;
+    else return -1
   }
 
   jumpp() {

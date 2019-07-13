@@ -5,6 +5,9 @@ class Game {
     this.obstacle = new Obstaculos( "rgba(150,150,0,1)");
     this.obstacle2 = new Obstaculos("rgba(150,150,0,1)");
     this.loopGame = undefined;
+    this.background = new Image();
+    this.background.src = "images/background.png"
+    this.stop=undefined;
   }
   initCanvas() {
     var canvas = document.getElementById("canvasLienzo");
@@ -33,12 +36,13 @@ class Game {
         arrayObstacle.shift();
         arrayObstacle.shift();
       }
-    }, 2550);
+    }, 2700);
     this.loopGame = window.requestAnimationFrame(this._update.bind(this));
   }
   _update() {
     this.ctx.fillStyle = "rgba(0,0,0,1)";
     this.ctx.fillRect(0, 0, 500, 300); //borrado
+    this.ctx.drawImage(this.background,0,0,500,300)
     this.player.draw();
 
     arrayObstacle.forEach(obstacle => {
@@ -49,16 +53,16 @@ class Game {
         this.checkCollisionDown(obstacle) === true
       ) {
         console.log("he colisionado");
-        resultado = -1;
+        this.stop = -1;
       }
     });
-    if (resultado === -1) {
+    if (this.stop === -1) {
       window.cancelAnimationFrame(this.loopGame);
     } else {
       this.loopGame = window.requestAnimationFrame(this._update.bind(this));
     }
     console.log("array");
-    var resultado = this.player.update(300, 500, 0, 0);
+    this.stop = this.player.update();
   }
   //COLISION SUPERIOR
   checkCollisionUp(obstacle) {

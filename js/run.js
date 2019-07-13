@@ -17,5 +17,3 @@ document.onload = (function() {
   });
   console.log(mybutton);
 })();
-
-
