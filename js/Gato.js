@@ -7,16 +7,19 @@ class Gato {
     this.color = color;
     this.gravity = gravity;
     this.jump = 22;
+    this.gatoImage = new Image();
+    this.gatoImage.src = "images/gato3.png";
   }
 
   draw() {
-    game.ctx.fillStyle = this.color;
-    game.ctx.fillRect(this.x, this.y, this.width, this.height);
+    game.ctx.drawImage(this.gatoImage, this.x, this.y, this.width, this.height);
+    // game.ctx.fillStyle = this.color;
+    // game.ctx.fillRect(this.x, this.y, this.width, this.height);
   }
   update() {
     this.y += this.gravity;
-    if (this.y>0 && this.y<260) return 0;
-    else return -1
+    if (this.y > 0 && this.y < 260) return 0;
+    else return -1;
   }
 
   jumpp() {

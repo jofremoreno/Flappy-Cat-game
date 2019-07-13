@@ -1,13 +1,13 @@
 class Game {
   constructor() {
     this.ctx = undefined;
-    this.player = new Gato(20, 100, 40, 40, "rgba(255,0,0,1)", 1);
-    this.obstacle = new Obstaculos( "rgba(150,150,0,1)");
+    this.player = new Gato(20, 100, 80, 38, "rgba(255,0,0,1)", 1);
+    this.obstacle = new Obstaculos("rgba(150,150,0,1)");
     this.obstacle2 = new Obstaculos("rgba(150,150,0,1)");
     this.loopGame = undefined;
     this.background = new Image();
-    this.background.src = "images/background.png"
-    this.stop=undefined;
+    this.background.src = "images/background.png";
+    this.stop = undefined;
   }
   initCanvas() {
     var canvas = document.getElementById("canvasLienzo");
@@ -21,14 +21,19 @@ class Game {
     setInterval(() => {
       let x = 500;
       let y = 0;
-      let widthObstacle = 40; 
-      let spaceBetween = 90;
-      let obstacleHeight = Math.floor(Math.random() * 150) + 40; 
-  
+      let widthObstacle = 40;
+      let spaceBetween = 100;
+      let obstacleHeight = Math.floor(Math.random() * 150) + 10;
 
-      arrayObstacle.push(new Obstaculos(x, y, widthObstacle, obstacleHeight, "rgba(150,150,0,1)"));
       arrayObstacle.push(
-        new Obstaculos(x, y + obstacleHeight + spaceBetween, widthObstacle, 300,
+        new Obstaculos(x, y, widthObstacle, obstacleHeight, "rgba(150,150,0,1)")
+      );
+      arrayObstacle.push(
+        new Obstaculos(
+          x,
+          y + obstacleHeight + spaceBetween,
+          widthObstacle,
+          300,
           "rgba(150,150,0,1)"
         )
       );
@@ -36,13 +41,13 @@ class Game {
         arrayObstacle.shift();
         arrayObstacle.shift();
       }
-    }, 2700);
+    }, 2800);
     this.loopGame = window.requestAnimationFrame(this._update.bind(this));
   }
   _update() {
     this.ctx.fillStyle = "rgba(0,0,0,1)";
     this.ctx.fillRect(0, 0, 500, 300); //borrado
-    this.ctx.drawImage(this.background,0,0,500,300)
+    this.ctx.drawImage(this.background, 0, 0, 500, 300);
     this.player.draw();
 
     arrayObstacle.forEach(obstacle => {
