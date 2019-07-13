@@ -24,7 +24,7 @@ class Game {
       let widthObstacle = 40;
       let spaceBetween = 100;
       let obstacleHeight = Math.floor(Math.random() * 150) + 10;
-
+      
       arrayObstacle.push(
         new Obstaculos(x, y, widthObstacle, obstacleHeight, "rgba(150,150,0,1)")
       );
