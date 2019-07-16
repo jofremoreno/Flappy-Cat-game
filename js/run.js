@@ -6,6 +6,8 @@ document.onload = (function() {
     game.initCanvas();
     game.start();
     mybutton.style.display="none"
+  
+    
 
     window.addEventListener("keyup", function(e) {
       if (e.keyCode == 32) {
