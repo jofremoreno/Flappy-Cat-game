@@ -27,6 +27,6 @@ class Obstaculos {
     );
   }
   update() {
-    this.x--;
+    this.x-- ;
   }
 }

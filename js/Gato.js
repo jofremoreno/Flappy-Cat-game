@@ -5,8 +5,8 @@ class Gato {
     this.width = width;
     this.height = height;
     this.color = color;
-    this.gravity = 1.5;
-    this.jump = gravity + 33;
+    this.gravity = 2;
+    this.jump = gravity + 40;
     this.gatoImage = new Image();
     this.gatoImage.src = "images/dakota1.png";
     this.jumpSound = new Audio();
@@ -26,7 +26,5 @@ class Gato {
 
   jumpp() {
     this.y = this.y - this.jump;
-    this.dx = (Math.cos(rads) * speed) / 6;
-    this.dy = (Math.sin(rads) * speed) / 6;
   }
 }

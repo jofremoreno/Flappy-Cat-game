@@ -1,7 +1,7 @@
 class Game {
   constructor() {
     this.ctx = undefined;
-    this.player = new Gato(20, 100, 42, 42, "rgba(255,0,0,1)", 1);
+    this.player = new Gato(20, 100, 50, 50, "rgba(255,0,0,1)", 1);
     this.obstacle = new Obstaculos(); //("rgba(150,150,0,1)");
     this.obstacle2 = new Obstaculos(); //("rgba(150,150,0,1)");
     this.loopGame = undefined;
@@ -24,7 +24,7 @@ class Game {
       let x = 500;
       let y = 0;
       let widthObstacle = 45;
-      let spaceBetween = 110;
+      let spaceBetween = 115;
       let obstacleHeight = Math.floor(Math.random() * 150) + 10;
 
       arrayObstacle.push(
