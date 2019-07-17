@@ -1,7 +1,7 @@
 class Game {
   constructor() {
     this.ctx = undefined;
-    this.player = new Gato(20, 100, 50, 50, "rgba(255,0,0,1)", 1);
+    this.player = new Gato(20, 100, 42, 42, "rgba(255,0,0,1)", 1);
     this.obstacle = new Obstaculos(); //("rgba(150,150,0,1)");
     this.obstacle2 = new Obstaculos(); //("rgba(150,150,0,1)");
     this.loopGame = undefined;
@@ -42,6 +42,8 @@ class Game {
     }, 2800);
     this.loopGame = window.requestAnimationFrame(this._update.bind(this));
   }
+
+  
   _update() {
     this.ctx.fillStyle = "rgba(0,0,0,1)";
     this.ctx.fillRect(0, 0, 500, 300); //borrado
@@ -140,6 +142,7 @@ class Game {
     if (arrayObstacle.length > 0) {
       if (arrayObstacle[0].x === 0) {
         this.score += 1;
+        game.player.pointSound.play();
       }
     }
   }

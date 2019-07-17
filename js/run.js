@@ -10,7 +10,9 @@ document.onload = (function() {
     window.addEventListener("keyup", function(e) {
       if (e.keyCode == 32) {
         game.player.jumpp();
+        game.player.jumpSound.play();
       }
     });
   });
 })();
+

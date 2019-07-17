@@ -5,16 +5,18 @@ class Gato {
     this.width = width;
     this.height = height;
     this.color = color;
-    this.gravity = 2.5;
-    this.jump = gravity + 50;
+    this.gravity = 1.5;
+    this.jump = gravity + 33;
     this.gatoImage = new Image();
     this.gatoImage.src = "images/dakota1.png";
+    this.jumpSound = new Audio();
+    this.jumpSound.src = "sounds/sfx_wing.mp3";
+    this.pointSound = new Audio();
+    this.pointSound.src = "sounds/Mario-coin-sound.mp3";
   }
 
   draw() {
     game.ctx.drawImage(this.gatoImage, this.x, this.y, this.width, this.height);
-    // game.ctx.fillStyle = this.color;
-    // game.ctx.fillRect(this.x, this.y, this.width, this.height);
   }
   update() {
     this.y += this.gravity;
@@ -24,5 +26,7 @@ class Gato {
 
   jumpp() {
     this.y = this.y - this.jump;
+    this.dx = (Math.cos(rads) * speed) / 6;
+    this.dy = (Math.sin(rads) * speed) / 6;
   }
 }

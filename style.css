@@ -7,12 +7,16 @@
   background-image: url("images/screenplay.png");
   width: 500px;
   height: 300px;
-  /*font-size: 1em;
-  padding: 10px 10px;
-  border-radius: 5px;*/
 }
-h1, h2, h3{
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+h1,
+h2,
+h3 {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   text-align: center;
-
+}
+#pause {
+  background-image: url("images/game over 2.png");
+  width: 500px;
+  height: 300px;
 }
