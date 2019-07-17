@@ -5,8 +5,8 @@ class Gato {
     this.width = width;
     this.height = height;
     this.color = color;
-    this.gravity = gravity;
-    this.jump = 22;
+    this.gravity = 2.5;
+    this.jump = gravity + 50;
     this.gatoImage = new Image();
     this.gatoImage.src = "images/dakota1.png";
   }

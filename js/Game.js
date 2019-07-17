@@ -6,7 +6,7 @@ class Game {
     this.obstacle2 = new Obstaculos(); //("rgba(150,150,0,1)");
     this.loopGame = undefined;
     this.background = new Image();
-    this.background.src = "images/background.png";
+    this.background.src = "images/flappy-bird-background-png-5-transparent.png";
     this.stop = undefined;
     this.score = 0;
     this.fontFamily = "flappy";
@@ -23,7 +23,7 @@ class Game {
     setInterval(() => {
       let x = 500;
       let y = 0;
-      let widthObstacle = 40;
+      let widthObstacle = 45;
       let spaceBetween = 110;
       let obstacleHeight = Math.floor(Math.random() * 150) + 10;
 
@@ -39,10 +39,6 @@ class Game {
           "rgba(150,150,0,1)"
         )
       );
-      // if (arrayObstacle.length > 8) {
-      //   arrayObstacle.shift();
-      //   arrayObstacle.shift();
-      // }
     }, 2800);
     this.loopGame = window.requestAnimationFrame(this._update.bind(this));
   }
@@ -51,6 +47,18 @@ class Game {
     this.ctx.fillRect(0, 0, 500, 300); //borrado
     this.ctx.drawImage(this.background, 0, 0, 500, 300);
     this.player.draw();
+    this.ctx.beginPath();
+    this.ctx.arc(
+      this.player.x,
+      this.player.y,
+      this.player.radius,
+      0,
+      Math.PI * 2
+    );
+
+    this.ctx.fillStyle = "white";
+    this.ctx.fill();
+    this.ctx.closePath();
 
     arrayObstacle.forEach((obstacle, i) => {
       obstacle.update();
@@ -131,7 +139,7 @@ class Game {
     this.ctx.fillText(`${this.score}`, 250, 50);
     if (arrayObstacle.length > 0) {
       if (arrayObstacle[0].x === 0) {
-        this.score += 10;
+        this.score += 1;
       }
     }
   }
