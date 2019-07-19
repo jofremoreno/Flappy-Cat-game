@@ -24,14 +24,21 @@ class Gato {
     // this.gravitySpeed += this.gravity;
     // this.y += this.speedY + this.gravitySpeed;
     this.y += this.gravity;
-    if (this.y > 0 && this.y < 260) {
+    if (this.y > 0 && this.y < 300) {
       return 0;
     } else {
       return -1;
     }
   }
-
   jumpp() {
     this.y = this.y - this.jump;
+  }
+  getOut() {
+    console.log("getOut");
+    if (this.y > 0 && this.y < 260) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

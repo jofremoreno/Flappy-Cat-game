@@ -23,16 +23,21 @@ class Game {
     this.pause = false;
 
     this.gameOver = false;
+
+    this.canvas = undefined;
   }
+
+  //PINTAMOS LIENZO
   initCanvas() {
-    var canvas = document.getElementById("canvasLienzo");
-    canvas.width = this.width;
-    canvas.height = this.height;
-    this.ctx = canvas.getContext("2d");
+    this.canvas = document.getElementById("canvasLienzo");
+    this.canvas.width = this.width;
+    this.canvas.height = this.height;
+    this.ctx = this.canvas.getContext("2d");
     this.ctx.fillStyle = "rgba(0,0,0,1)";
     this.ctx.fillRect(0, 0, 300, 300);
   }
 
+  //GENERADOR DE OBSTACULOS
   _generateObstacle() {
     let widthObstacle = 45;
     let spaceBetween = 115;
@@ -51,6 +56,7 @@ class Game {
     );
   }
 
+  //CONTROLES DE JUEGO - TECLAS
   gameControl() {
     window.addEventListener(
       "keyup",
@@ -77,6 +83,7 @@ class Game {
     // this.loopGame = window.requestAnimationFrame(this._update.bind(this));
   }
 
+  //PAUSE - RESTART - GAMEOVER
   _pauseGame() {
     this.pause = true;
     window.cancelAnimationFrame(this.gameInterval);
@@ -85,14 +92,23 @@ class Game {
     this.pause = false;
     this.gameInterval = window.requestAnimationFrame(this._update.bind(this));
   }
+  _gameOver() {
+    var gameOver = document.getElementsByClassName("gameOverScreen")[0];
+    var clearGameOver = undefined;
+    gameOver.style.display = "block";
+    this.canvas.style.display = "none";
 
-  _gameOver(){
     this.player.crashSound.play();
     this.gameOver = true;
     window.cancelAnimationFrame(this.gameInterval);
-    //$(".gameOverScreen").toggleClass("show-hide");
+    clearGameOver = setTimeout(() => {
+      gameOver.style.display = "none";
+      location.reload();
+      clearTimeout(clearGameOver);
+    }, 3000);
   }
 
+  //FUNCIÓN UPDATE
   _update() {
     // lo 1o q debe hacer es arrancar el loop
     // poniendo la variable en la que guardo el loop con el animationFrame consigo misma como parametro
@@ -116,7 +132,7 @@ class Game {
       obstacle.draw();
       if (
         this.checkCollisionUp(obstacle) ||
-        this.checkCollisionDown(obstacle) === true
+        this.checkCollisionDown(obstacle)
       ) {
         this._gameOver();
         this.player.crashSound.play();
@@ -129,6 +145,12 @@ class Game {
       }
     });
 
+    if (this.player.getOut()) {
+      this._gameOver();
+      this.player.crashSound.play();
+      this.stop = -1;
+    }
+
     this.points();
     // if (this.stop === -1) {
     //   window.cancelAnimationFrame(this.loopGame);
@@ -137,28 +159,30 @@ class Game {
     // }
     this.stop = this.player.update();
   }
-//COLISION CANVAS
-checkCollisionCanvasUp(canvas){
-  var myLeft = this.player.x;
-  var myRight = this.player.x + this.player.width;
-  var myTop = this.player.y;
-  var myBottom = this.player.y + this.player.height;
+  //COLISIONES
+  //COLISION CANVAS
+  // checkCollisionCanvasUp(canvas){
+  //   var myLeft = this.player.x;
+  //   var myRight = this.player.x + this.player.width;
+  //   var myTop = this.player.y;
+  //   var myBottom = this.player.y + this.player.height;
 
-  var canvasWidth = canvas.width;
-  var canvasHeight = this.canvas.height;
+  //   var canvasWidth = canvas.width;
+  //   var canvasHeight = this.canvas.height;
 
-  var crash = true;
+  //   var crash = true;
 
-  if (
-    myBottom < canvasWidth ||
-    myTop > canvasWidth ||
-    myRight < canvasHeight ||
-    myLeft > canvasHeight
-  ) {
-    crash = false;
-  }
-  return crash;
-}
+  //   if (
+  //     myBottom < canvasWidth ||
+  //     myTop > canvasWidth ||
+  //     myRight < canvasHeight ||
+  //     myLeft > canvasHeight
+  //   ) {
+  //     crash = false;
+  //   }
+  //   return crash;
+  // }
+
   //COLISION SUPERIOR
   checkCollisionUp(obstacle) {
     var myLeft = this.player.x;
@@ -208,6 +232,8 @@ checkCollisionCanvasUp(canvas){
     }
     return crash;
   }
+
+  //CONTADOR DE PUNTOS
   points() {
     this.ctx.font = `50px ${this.fontFamily}`;
     this.ctx.textAlign = "center";
@@ -219,6 +245,12 @@ checkCollisionCanvasUp(canvas){
         game.player.pointSound.play();
       }
     }
+  }
+  pauseText() {
+    this.ctx.font = `50px ${this.fontFamily}`;
+    this.ctx.textAlign = "center";
+    this.ctx.fillStyle = "white";
+    this.ctx.fillText(`${this.score}`, 250, 50);
   }
   pause() {}
 }
