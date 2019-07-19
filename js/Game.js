@@ -73,7 +73,6 @@ class Game {
 
   start() {
     this.gameControl();
-
     this._update();
     // this.loopGame = window.requestAnimationFrame(this._update.bind(this));
   }
@@ -88,8 +87,10 @@ class Game {
   }
 
   _gameOver(){
+    this.player.crashSound.play();
     this.gameOver = true;
     window.cancelAnimationFrame(this.gameInterval);
+    //$(".gameOverScreen").toggleClass("show-hide");
   }
 
   _update() {
@@ -118,6 +119,7 @@ class Game {
         this.checkCollisionDown(obstacle) === true
       ) {
         this._gameOver();
+        this.player.crashSound.play();
         // en lugar de llamar a pauseGame(), llamar a otra funcion que cancele el intervalo
         // y que saque un div por encima del canvas
         this.stop = -1;
@@ -135,7 +137,28 @@ class Game {
     // }
     this.stop = this.player.update();
   }
+//COLISION CANVAS
+checkCollisionCanvasUp(canvas){
+  var myLeft = this.player.x;
+  var myRight = this.player.x + this.player.width;
+  var myTop = this.player.y;
+  var myBottom = this.player.y + this.player.height;
 
+  var canvasWidth = canvas.width;
+  var canvasHeight = this.canvas.height;
+
+  var crash = true;
+
+  if (
+    myBottom < canvasWidth ||
+    myTop > canvasWidth ||
+    myRight < canvasHeight ||
+    myLeft > canvasHeight
+  ) {
+    crash = false;
+  }
+  return crash;
+}
   //COLISION SUPERIOR
   checkCollisionUp(obstacle) {
     var myLeft = this.player.x;

@@ -15,8 +15,9 @@ h3 {
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   text-align: center;
 }
-#pause {
+.gameOverScreen {
+  display: none;
   background-image: url("images/game_over_2.png");
-  width: 500px;
-  height: 300px;
+  width: 300px;
+  height: 100px;
 }

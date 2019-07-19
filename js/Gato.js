@@ -10,9 +10,11 @@ class Gato {
     this.gatoImage = new Image();
     this.gatoImage.src = "images/dakota1.png";
     this.jumpSound = new Audio();
-    this.jumpSound.src = "sounds/sfx_wing.mp3";
+    this.jumpSound.src = "sounds/sfx_wing.wav";
     this.pointSound = new Audio();
-    this.pointSound.src = "sounds/Mario-coin-sound.mp3";
+    this.pointSound.src = "sounds/sfx_point.wav";
+    this.crashSound = new Audio();
+    this.crashSound.src = "sounds/sfx_hit.wav";
   }
 
   draw() {
