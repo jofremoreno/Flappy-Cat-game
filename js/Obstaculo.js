@@ -1,10 +1,9 @@
 class Obstaculos {
-  constructor(x, y, width, height, color) {
+  constructor(x, y, width, height) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    // this.color = color;
     this.obstaculoNorteImage = new Image();
     this.obstaculoNorteImage.src = "images/tuberiaNorte.png";
     this.obstaculoSurImage = new Image();

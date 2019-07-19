@@ -1,62 +1,110 @@
 class Game {
-  constructor() {
+  constructor(width, height) {
     this.ctx = undefined;
     this.player = new Gato(20, 100, 50, 50, "rgba(255,0,0,1)", 1);
     this.obstacle = new Obstaculos(); //("rgba(150,150,0,1)");
     this.obstacle2 = new Obstaculos(); //("rgba(150,150,0,1)");
-    this.loopGame = undefined;
+    // this.loopGame = undefined;
     this.background = new Image();
     this.background.src = "images/flappy-bird-background-png-5-transparent.png";
     this.stop = undefined;
     this.score = 0;
     this.fontFamily = "flappy";
+
+    this.gameInterval = undefined;
+    this.pause = false;
+
+    this.width = width;
+    this.height = height;
+
+    this.counterRandomObstacle = 0;
+
+    this.gameInterval = undefined;
+    this.pause = false;
+
+    this.gameOver = false;
   }
   initCanvas() {
     var canvas = document.getElementById("canvasLienzo");
-    canvas.width = "500";
-    canvas.height = "300";
+    canvas.width = this.width;
+    canvas.height = this.height;
     this.ctx = canvas.getContext("2d");
     this.ctx.fillStyle = "rgba(0,0,0,1)";
     this.ctx.fillRect(0, 0, 300, 300);
   }
-  start() {
-    setInterval(() => {
-      let x = 500;
-      let y = 0;
-      let widthObstacle = 45;
-      let spaceBetween = 115;
-      let obstacleHeight = Math.floor(Math.random() * 150) + 10;
 
-      arrayObstacle.push(
-        new Obstaculos(x, y, widthObstacle, obstacleHeight, "rgba(150,150,0,1)")
-      );
-      arrayObstacle.push(
-        new Obstaculos(
-          x,
-          y + obstacleHeight + spaceBetween,
-          widthObstacle,
-          300,
-          "rgba(150,150,0,1)"
-        )
-      );
-    }, 2800);
-    this.loopGame = window.requestAnimationFrame(this._update.bind(this));
+  _generateObstacle() {
+    let widthObstacle = 45;
+    let spaceBetween = 115;
+    let obstacleHeight = Math.floor(Math.random() * 150) + 10;
+
+    arrayObstacle.push(
+      new Obstaculos(this.width, 0, widthObstacle, obstacleHeight)
+    );
+    arrayObstacle.push(
+      new Obstaculos(
+        this.width,
+        0 + obstacleHeight + spaceBetween,
+        widthObstacle,
+        this.height
+      )
+    );
   }
 
-  
-  _update() {
-    this.ctx.fillStyle = "rgba(0,0,0,1)";
-    this.ctx.fillRect(0, 0, 500, 300); //borrado
-    this.ctx.drawImage(this.background, 0, 0, 500, 300);
-    this.player.draw();
-    this.ctx.beginPath();
-    this.ctx.arc(
-      this.player.x,
-      this.player.y,
-      this.player.radius,
-      0,
-      Math.PI * 2
+  gameControl() {
+    window.addEventListener(
+      "keyup",
+      function(e) {
+        if (e.keyCode == 32) {
+          this.player.jumpp();
+          this.player.jumpSound.play();
+        }
+        if (e.keyCode === 80) {
+          if (this.pause === false) {
+            console.log("ha pausado");
+            this._pauseGame();
+          } else {
+            this._restartGame();
+          }
+        }
+      }.bind(this)
     );
+  }
+
+  start() {
+    this.gameControl();
+
+    this._update();
+    // this.loopGame = window.requestAnimationFrame(this._update.bind(this));
+  }
+
+  _pauseGame() {
+    this.pause = true;
+    window.cancelAnimationFrame(this.gameInterval);
+  }
+  _restartGame() {
+    this.pause = false;
+    this.gameInterval = window.requestAnimationFrame(this._update.bind(this));
+  }
+
+  _gameOver(){
+    this.gameOver = true;
+    window.cancelAnimationFrame(this.gameInterval);
+  }
+
+  _update() {
+    // lo 1o q debe hacer es arrancar el loop
+    // poniendo la variable en la que guardo el loop con el animationFrame consigo misma como parametro
+    this.counterRandomObstacle++;
+    if (this.counterRandomObstacle === 200) {
+      this._generateObstacle();
+      this.counterRandomObstacle = 0;
+    }
+    this.gameInterval = window.requestAnimationFrame(this._update.bind(this));
+
+    this.ctx.fillRect(0, 0, this.width, this.height); //borrado
+    this.ctx.drawImage(this.background, 0, 0, this.width, this.height);
+    this.player.draw();
 
     this.ctx.fillStyle = "white";
     this.ctx.fill();
@@ -69,22 +117,25 @@ class Game {
         this.checkCollisionUp(obstacle) ||
         this.checkCollisionDown(obstacle) === true
       ) {
+        this._gameOver();
+        // en lugar de llamar a pauseGame(), llamar a otra funcion que cancele el intervalo
+        // y que saque un div por encima del canvas
         this.stop = -1;
       }
       if (obstacle.x + obstacle.width < 0) {
         arrayObstacle.splice(i, 1);
-        console.log(arrayObstacle);
       }
     });
 
     this.points();
-    if (this.stop === -1) {
-      window.cancelAnimationFrame(this.loopGame);
-    } else {
-      this.loopGame = window.requestAnimationFrame(this._update.bind(this));
-    }
+    // if (this.stop === -1) {
+    //   window.cancelAnimationFrame(this.loopGame);
+    // } else {
+    //   this.loopGame = window.requestAnimationFrame(this._update.bind(this));
+    // }
     this.stop = this.player.update();
   }
+
   //COLISION SUPERIOR
   checkCollisionUp(obstacle) {
     var myLeft = this.player.x;
@@ -135,7 +186,7 @@ class Game {
     return crash;
   }
   points() {
-    this.ctx.font = `40px ${this.fontFamily}`;
+    this.ctx.font = `50px ${this.fontFamily}`;
     this.ctx.textAlign = "center";
     this.ctx.fillStyle = "white";
     this.ctx.fillText(`${this.score}`, 250, 50);
@@ -146,4 +197,5 @@ class Game {
       }
     }
   }
+  pause() {}
 }

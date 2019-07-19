@@ -5,7 +5,7 @@ class Gato {
     this.width = width;
     this.height = height;
     this.color = color;
-    this.gravity = 2;
+    this.gravity = 1.2;
     this.jump = gravity + 40;
     this.gatoImage = new Image();
     this.gatoImage.src = "images/dakota1.png";
@@ -19,9 +19,14 @@ class Gato {
     game.ctx.drawImage(this.gatoImage, this.x, this.y, this.width, this.height);
   }
   update() {
+    // this.gravitySpeed += this.gravity;
+    // this.y += this.speedY + this.gravitySpeed;
     this.y += this.gravity;
-    if (this.y > 0 && this.y < 260) return 0;
-    else return -1;
+    if (this.y > 0 && this.y < 260) {
+      return 0;
+    } else {
+      return -1;
+    }
   }
 
   jumpp() {
